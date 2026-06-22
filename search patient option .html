@@ -42,3 +42,49 @@ patients.forEach(patient => {
     
 </body>
 </html>
+<input type="text"
+id="searchInput"
+placeholder="Search Patient"
+onkeyup="searchPatient()">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Patient List</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Disease</th>
+        </tr>
+    </thead>
+    <tbody id="patientTable">
+    </tbody>
+</table>
+<script>
+let patients =
+JSON.parse(localStorage.getItem("patients")) || [];
+let table =
+document.getElementById("patientTable");
+patients.forEach(patient => {
+    table.innerHTML += `
+    <tr>
+        <td>${patient.name}</td>
+        <td>${patient.age}</td>
+        <td>${patient.disease}</td>
+    </tr>
+    `;
+});
+</script>
+
+</body>
+</html>
+ 
+
+
+

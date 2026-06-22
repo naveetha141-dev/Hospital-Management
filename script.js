@@ -162,3 +162,46 @@ function addPatient() {
     document.getElementById("age").value = "";
     document.getElementById("disease").value = "";
 }
+/*alter*/
+
+let patients =
+JSON.parse(localStorage.getItem("patients")) || [];
+
+document.getElementById("patientCount").innerText =
+patients.length;
+
+let table =
+document.getElementById("recentPatients");
+
+patients.slice(-5).forEach(patient=>{
+    table.innerHTML += `
+    <tr>
+      <td>${patient.name}</td>
+      <td>${patient.age}</td>
+      <td>${patient.disease}</td>
+    </tr>`;
+});
+
+function searchPatient() {
+  let input = document.getElementById("searchBox").value.toLowerCase();
+  let boxes = document.querySelectorAll(".patient-box");
+
+  boxes.forEach(box => {
+    let name = box.querySelector(".name").textContent.toLowerCase();
+
+    if (name.includes(input) && input !== "") {
+      box.classList.remove("hide");
+
+      // highlight only name part
+      box.querySelector(".name").classList.add("highlight");
+    } else {
+      box.classList.add("hide");
+      box.querySelector(".name").classList.remove("highlight");
+    }
+
+    if (input === "") {
+      box.classList.remove("hide");
+      box.querySelector(".name").classList.remove("highlight");
+    }
+  });
+}
